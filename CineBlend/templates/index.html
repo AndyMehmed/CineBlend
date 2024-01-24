@@ -1,4 +1,3 @@
-<!-- Add this to your HTML template -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,18 +33,6 @@
                 <p><strong>Actors:</strong> {{ movie.Actors }}</p>
                 <p><strong>Directors:</strong> {{ movie.Directors }}</p>
                 <p><strong>Rating:</strong> {{movie.Ratings}} </p>
-
-                <!--{% if director_movies %}
-                <h3>More Movies from {{ movie.Directors }}:</h3>
-                <ul>
-                    {% for director_movie in director_movies %}
-                        <li>{{ director_movie.Title }} ({{ director_movie.Year }}) - <img src="{{ director_movie.Poster }}" alt="{{ director_movie.Title }} Poster" class="poster"></li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-
-                Fixa mer här imorgon!! :DD
-                -->
             {% endif %}
 
             {% if books %}
