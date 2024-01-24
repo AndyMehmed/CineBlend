@@ -1,0 +1,68 @@
+<!-- Add this to your HTML template -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineBlend Recommender</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>CineBlend Recommender</h1>
+        <h2>Discover Movies and Books Seamlessly</h2>
+    </header>
+
+    <div class="container">
+        <form method="post">
+            <label for="user_input">Enter a Movie Title:</label>
+            <input type="text" id="user_input" name="user_input" required>
+            <button type="submit">Get Recommendations</button>
+        </form>
+
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% else %}
+            {% if movie %}
+            <div class="movie">
+                <h2>{{ movie.Title }} ({{ movie.Year }})</h2>
+                <img src="{{ movie.Poster }}" alt="{{ movie.Title }} Poster" class="poster">
+                <p>{{ movie.Plot }}</p>
+                <p><strong>Actors:</strong> {{ movie.Actors }}</p>
+                <p><strong>Directors:</strong> {{ movie.Directors }}</p>
+                <p><strong>Rating:</strong> {{movie.Ratings}} </p>
+
+                <!--{% if director_movies %}
+                <h3>More Movies from {{ movie.Directors }}:</h3>
+                <ul>
+                    {% for director_movie in director_movies %}
+                        <li>{{ director_movie.Title }} ({{ director_movie.Year }}) - <img src="{{ director_movie.Poster }}" alt="{{ director_movie.Title }} Poster" class="poster"></li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
+                Fixa mer här imorgon!! :DD
+                -->
+            {% endif %}
+
+            {% if books %}
+            <h3>Book Recommendations:</h3>
+            <div class="book-suggestions">
+                {% for book in books %}
+                    <a href="{{ book.link }}" target="_blank" class="book-card">
+                        {% if book.thumbnail %}
+                            <img src="{{ book.thumbnail }}" alt="{{ book.title }} Thumbnail" class="thumbnail">
+                        {% endif %}
+                        <strong>{{ book.title }}</strong><br>
+                        <em>{{ book.author }}</em>
+                    </a>
+                {% endfor %}
+            </div>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>
