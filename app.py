@@ -1,14 +1,19 @@
+# Här importeras Flask och request samt config-filen där API-nycklar finns.
 from flask import Flask, render_template, request
 import requests
-import config 
+import config
 
+# Här skapas en instans.
 app = Flask(__name__)
 
+# Här skapas varibler för API-nycklar.
 OMDB_API_KEY = config.OMDB_API_KEY
 GOOGLE_BOOKS_API_KEY = config.GOOGLE_BOOKS_API_KEY
 
+# Här berättar vi var appen ska hitta templates för programmet.
 app.template_folder = "templates"
 
+# Vi definierar en rutt och vad den rutten gör.
 @app.route('/', methods=['GET', 'POST'])
 def index():
     movie_data = None
@@ -32,13 +37,14 @@ def index():
     return render_template('index.html', movie=movie_data)
 
 
-
+# Funktion hämtar datan från filmnamnet via OMDB:s API.
 def get_movie_data(movie_title):
     try:
         omdb_url = f'http://www.omdbapi.com/?apikey={OMDB_API_KEY}&t={movie_title}&plot=full'
         response = requests.get(omdb_url)
         response.raise_for_status()
 
+# Datan vi får kommer in som Json och utifrån den datan gör vi ett urval vilka data vi vill visa.
         data = response.json()
 
         if data.get('Response') == 'True':
@@ -56,6 +62,7 @@ def get_movie_data(movie_title):
     
     return None
 
+# I denna funktion skickar vi med datan från filmen och får således ut respons från Google Books API som har koppling till informationen som hör till filmen.
 def get_book_recommendations(movie_data):
     try:
         google_books_url = 'https://www.googleapis.com/books/v1/volumes'
@@ -69,6 +76,7 @@ def get_book_recommendations(movie_data):
 
         data = response.json()
 
+# Här får vi också ut datan som Json och väljer därefter ut vilka data vi vill ha.
         if 'items' in data:
             books = []
             for item in data['items']:
