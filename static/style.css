@@ -18,7 +18,8 @@ header {
     align-items: center;
     width: 90%; 
     margin: 20px auto;
-    border-radius: 10px; 
+    border-radius: 10px;
+    max-width: 1000px;
 }
 
 h3 {
