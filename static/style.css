@@ -21,6 +21,11 @@ header {
     border-radius: 10px; 
 }
 
+h3 {
+    font-weight: 900;
+    font-size: x-large;
+}
+
 form {
     text-align: center;
     margin-bottom: 20px;
