@@ -42,7 +42,7 @@ def index():
     # Rendera index.html med filmdata.
     return render_template('index.html', movie=movie_data)
 
-# Definiera huvudrouten för appen.
+#Denna ändpunkt hanterar vårt api
 @app.route('/api', methods=['GET'])
 def API():
     # Initiera variabel för att lagra filmdata.
