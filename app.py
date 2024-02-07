@@ -42,6 +42,22 @@ def index():
     # Rendera index.html med filmdata.
     return render_template('index.html', movie=movie_data)
 
+# Definiera huvudrouten för appen.
+@app.route('/api', methods=['GET'])
+def API():
+    # Initiera variabel för att lagra filmdata.
+    movie = request.args.get('movie')
+    # Kontrollera att användaren faktiskt har skrivit in något i sökfältet.
+    if movie:
+        # Hämta filmdata från OMDb API baserat på användarens inmatning.
+        movie_data = get_movie_data(movie)
+
+        if movie_data:
+            # Hämta bokrekommendationer baserat på filmdata.
+            book_recommendations = get_book_recommendations(movie_data)
+            return {"movie":movie_data,"book_recommendations":book_recommendations}
+
+
 
 # Funktion för att hämta filmdata från OMDb API baserat på filmnamn.
 def get_movie_data(movie_title):
