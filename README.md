@@ -92,6 +92,9 @@ python app.py
 ```bash
 cd path/till/ditt/projekt
  ```
+```bash
+python app.py
+ ```
  
 
 Dependencies
