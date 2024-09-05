@@ -88,6 +88,10 @@ python app.py
 7. Enjoy!
 
 * Please enjoy using our app!
+
+```bash
+cd path/till/ditt/projekt
+ ```
  
 
 Dependencies
