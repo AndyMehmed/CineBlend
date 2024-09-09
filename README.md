@@ -89,16 +89,6 @@ python app.py
 
 * Please enjoy using our app!
 
-```bash
-cd path/till/ditt/projekt
- ```
-```bash
-python app.py
- ```
-
-```bash
-Running on http://127.0.0.1:5000/
- ```
  
 
 Dependencies
