@@ -1,55 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CineBlend Recommender</title>
+    <title>CineBlend Recommender - Moderniserad</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="static/style.css">
 </head>
 
 <body>
     <header>
         <h1>CineBlend Recommender</h1>
-        <h2>Discover Movies and Books Seamlessly</h2>
+        <h2>Upptäck filmer och böcker sömlöst</h2>
     </header>
 
     <div class="container">
         <form method="post">
-            <label for="user_input">Enter a Movie Title:</label>
-            <input type="text" id="user_input" name="user_input" required>
-            <button type="submit">Get Recommendations</button>
+            <label for="user_input">Ange en filmtitel:</label>
+            <input type="text" id="user_input" name="user_input" required placeholder="T.ex. Inception">
+            <button type="submit">Få Rekommendationer</button>
         </form>
 
-        {% if error %}
-        <p class="error">{{ error }}</p>
-        {% else %}
-            {% if movie %}
-            <div class="movie">
-                <h2>{{ movie.Title }} ({{ movie.Year }})</h2>
-                <img src="{{ movie.Poster }}" alt="{{ movie.Title }} Poster" class="poster">
-                <p>{{ movie.Plot }}</p>
-                <p><strong>Actors:</strong> {{ movie.Actors }}</p>
-                <p><strong>Directors:</strong> {{ movie.Directors }}</p>
-                <p><strong>Rating:</strong> {{movie.Ratings}} </p>
-            {% endif %}
+        <div class="results-container">
+            {% if error %}
+            <p class="error">{{ error }}</p>
+            {% else %}
+                {% if movie %}
+                <div class="movie fade-in">
+                    <img src="{{ movie.Poster }}" alt="{{ movie.Title }} Poster" class="poster">
+                    <div class="movie-details">
+                        <h2>{{ movie.Title }} ({{ movie.Year }})</h2>
+                        <p class="plot">{{ movie.Plot }}</p>
+                        <p><strong>Skådespelare:</strong> {{ movie.Actors }}</p>
+                        <p><strong>Regissörer:</strong> {{ movie.Directors }}</p>
+                        <p><strong>Betyg:</strong> {{ movie.Ratings }}</p>
+                    </div>
+                </div>
+                {% endif %}
 
-            {% if books %}
-            <h3>Book Recommendations:</h3>
-            <div class="book-suggestions">
-                {% for book in books %}
-                    <a href="{{ book.link }}" target="_blank" class="book-card">
-                        {% if book.thumbnail %}
-                            <img src="{{ book.thumbnail }}" alt="{{ book.title }} Thumbnail" class="thumbnail">
-                        {% endif %}
-                        <strong>{{ book.title }}</strong><br>
-                        <em>{{ book.author }}</em>
-                    </a>
-                {% endfor %}
-            </div>
+                {% if books %}
+                <div class="book-recommendations fade-in">
+                    <h3>Bokrekommendationer:</h3>
+                    <div class="book-suggestions">
+                        {% for book in books %}
+                            <a href="{{ book.link }}" target="_blank" class="book-card">
+                                {% if book.thumbnail %}
+                                    <img src="{{ book.thumbnail }}" alt="{{ book.title }} Thumbnail" class="thumbnail">
+                                {% else %}
+                                    <div class="thumbnail-placeholder">Ingen bild</div>
+                                {% endif %}
+                                <div class="book-info">
+                                    <strong>{{ book.title }}</strong><br>
+                                    <em>{{ book.author }}</em>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
             {% endif %}
-        {% endif %}
-    </div>
-</body>
+        </div> </div> </body>
 </html>
